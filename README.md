@@ -1,5 +1,7 @@
 ## Babel plugin transform React qa classes
-[![Build Status](https://travis-ci.org/davesnx/babel-plugin-transform-react-qa-classes.svg?branch=master)](https://travis-ci.org/davesnx/babel-plugin-transform-react-qa-classes) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/) [![npm](https://img.shields.io/npm/dm/localeval.svg)](https://www.npmjs.com/package/babel-plugin-transform-react-qa-classes)
+[![Build Status](https://travis-ci.org/tanapoln/babel-plugin-transform-react-qa-classes.svg?branch=master)](https://travis-ci.org/tanapoln/babel-plugin-transform-react-qa-classes) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/) [![npm](https://img.shields.io/npm/dm/localeval.svg)](https://www.npmjs.com/package/babel-plugin-transform-react-qa)
+
+  FORKED FROM [davesnx/babel-plugin-transform-react-qa-classes](https://github.com/davesnx/babel-plugin-transform-react-qa-classes)
 
 This plugin adds the component name as a `data-qa` in each React Component.
 
@@ -27,7 +29,7 @@ class componentName extends Component {
 class componentName extends Component {
   render () {
     return (
-      &lt;div data-qa='componentname'&gt;
+      &lt;div data-qa='component-name'&gt;
         &lt;div&gt;Hello world&lt;/div&gt;
       &lt;/div&gt;
     )
@@ -57,7 +59,7 @@ div(:component, data_qa: 'component')
 
 ### Install
 ```bash
-npm install --save-dev babel-plugin-transform-react-qa-classes
+npm install --save-dev babel-plugin-transform-react-qa
 # or yarn add -d
 ```
 
@@ -68,7 +70,7 @@ npm install --save-dev babel-plugin-transform-react-qa-classes
   "presets": ["es2015", "react"], // This asumes that you use those presets
   "env": {
     "dev": {
-      "plugins": ["transform-react-qa-classes"]
+      "plugins": ["transform-react-qa"]
     }
   }
 }
@@ -79,18 +81,21 @@ npm install --save-dev babel-plugin-transform-react-qa-classes
 #### with CLI
 
 ```bash
-babel --plugins transform-react-qa-classes component.js
+babel --plugins transform-react-qa component.js
 ```
 
 #### or programatically with [babel-core](https://www.npmjs.com/package/babel-core)
 
 ```js
 require('babel-core').transform(`code`, {
-  plugins: ['transform-react-qa-classes']
+  plugins: ['transform-react-qa']
 })
 ```
 
 ### Collaborate
+Thank you for collaborate with this plugins.
 
-This plugin is in a early stage and potentially can change, I will follow semVer convention.
-Even the name isn't declarative for what it does and it just solves one problem with QA Automate, can be more generic.
+Each PR must have test that support it. Please duplicate fixture inside `test/fixtures/react` and write your own.
+
+### LICENSE
+MIT
