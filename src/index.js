@@ -9,15 +9,27 @@ export default function ({types: t}) {
         const options = checkValidOptions(state)
         const componentName = path.parent.id.name
 
+        let openingElement = null
         const functionBody = path.get('body').get('body')
-        const returnStatement = functionBody.find((c) => {
-          return c.type === 'ReturnStatement'
-        })
+        if (functionBody.parent && functionBody.parent.type === 'JSXElement') {
+          const jsxElement = functionBody.find((c) => {
+            return c.type === 'JSXElement'
+          })
+          if (!jsxElement) return
+          openingElement = jsxElement.get('openingElement')
+        } else {
+          const returnStatement = functionBody.find((c) => {
+            return c.type === 'ReturnStatement'
+          })
+          if (!returnStatement) return
 
-        const arg = returnStatement.get('argument')
-        if (!arg.isJSXElement()) return
+          const arg = returnStatement.get('argument')
+          if (!arg.isJSXElement()) return
 
-        let openingElement = arg.get('openingElement')
+          openingElement = arg.get('openingElement')
+        }
+
+        if (!openingElement) return
         openingElement.node.attributes.push(
           t.jSXAttribute(
             t.jSXIdentifier(options.attribute),
