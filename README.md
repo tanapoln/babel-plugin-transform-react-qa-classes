@@ -8,7 +8,7 @@ This plugin adds the component name as a `data-qa` in each React Component.
 <table>
   <tr>
     <th>Before</th>
-    <th>After</th> 
+    <th>After</th>
   </tr>
   <tr>
     <td>
@@ -78,6 +78,24 @@ npm install --save-dev babel-plugin-transform-react-qa
 
 > Note: Adding this plugin only on `DEV` mode (or `PREPROD`) allows not having this `data-qa` attributes on production.
 
+You can specify the format of the name that you want and the name of the attribute:
+
+```json
+{
+  "presets": ["es2015", "react"], // This asumes that you use those presets
+  "env": {
+    "dev": {
+      "plugins": ["transform-react-qa", {
+        "attribute": "qa-property",
+        "format": "camel"
+      }]
+    }
+  }
+}
+```
+
+> Note: format can be: "camel" (camelCase), "snake" (snake_case) or "kebab" (kebab-case).
+
 #### with CLI
 
 ```bash
@@ -91,11 +109,3 @@ require('babel-core').transform(`code`, {
   plugins: ['transform-react-qa']
 })
 ```
-
-### Collaborate
-Thank you for collaborate with this plugins.
-
-Each PR must have test that support it. Please duplicate fixture inside `test/fixtures/react` and write your own.
-
-### LICENSE
-MIT
