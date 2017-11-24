@@ -3,7 +3,11 @@ import checkValidOptions from './options'
 export default function ({types: t}) {
   return {
     visitor: {
+      CallExpression(path, state) {
+
+      },
       ArrowFunctionExpression (path, state) {
+        console.log(path.parent)
         if (!path.parent.id || !path.parent.id.name) return;
 
         const options = checkValidOptions(state)
