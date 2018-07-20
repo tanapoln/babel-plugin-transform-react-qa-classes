@@ -1,6 +1,15 @@
 import checkValidOptions from './options'
 
-function functionBodyPushAttributes(t, path, options, componentName) {
+function isFragment (openingElement) {
+  return (
+    openingElement.node.name.name === 'Fragment' ||
+    (openingElement.node.name.type === 'JSXMemberExpression' &&
+      openingElement.node.name.object.name === 'React' &&
+      openingElement.node.name.property.name === 'Fragment')
+  );
+}
+
+function functionBodyPushAttributes (t, path, options, componentName) {
   let openingElement = null
   const functionBody = path.get('body').get('body')
   if (functionBody.parent && functionBody.parent.type === 'JSXElement') {
@@ -22,6 +31,8 @@ function functionBodyPushAttributes(t, path, options, componentName) {
   }
 
   if (!openingElement) return
+  if (isFragment(openingElement)) return
+
   openingElement.node.attributes.push(
     t.jSXAttribute(
       t.jSXIdentifier(options.attribute),
@@ -72,7 +83,9 @@ export default function ({types: t}) {
             const arg = returnStatement.get('argument')
             if (!arg.isJSXElement()) return
 
-            let openingElement = arg.get('openingElement')
+            const openingElement = arg.get('openingElement')
+            if (isFragment(openingElement)) return
+
             openingElement.node.attributes.push(
               t.jSXAttribute(
                 t.jSXIdentifier(options.attribute),
