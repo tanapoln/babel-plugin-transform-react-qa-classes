@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 class PureComponentName extends React.PureComponent {
     render() {
-        return <div>
+        return <Fragment>
             <h1>Hello world</h1>
-        </div>;
+        </Fragment>;
     }
 }
 
