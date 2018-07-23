@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-transform-react-qa",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Add component's name in `data-qa` attributes to React Components Edit",
   "repository": "https://github.com/davesnx/babel-plugin-transform-react-qa-classes",
   "author": "Tanapol Nearunchorn <tanapol.sh@gmail.com>",
